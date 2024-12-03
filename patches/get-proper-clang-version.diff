@@ -1,0 +1,14 @@
+The clang version check spits out the wrong value, changing
+the awk print command from '$3' to '$4' fixes that problem.
+
+--- configure.ac.orig	2024-12-03 14:15:24.569549903 -0500
++++ configure.ac	2024-12-03 14:15:44.189460824 -0500
+@@ -187,7 +187,7 @@
+ 	AC_MSG_RESULT([$GCC_VER])
+ 
+ 	AC_MSG_CHECKING([clang version])
+-	CLANG_VER=`$CC -v 2>&1 | $AWK '/clang version /{print $3}'`
++	CLANG_VER=`$CC -v 2>&1 | $AWK '/clang version /{print $4}'`
+ 	AC_MSG_RESULT([$CLANG_VER])
+ 
+ 	OSSH_CHECK_CFLAG_COMPILE([-pipe])

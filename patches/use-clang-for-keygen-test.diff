@@ -1,0 +1,32 @@
+We build openssh with clang, so the test should also use it.
+
+diff -urN keygen-test.orig/getpid.c keygen-test/getpid.c
+--- keygen-test.orig/getpid.c	2024-12-03 18:36:27.936733482 -0500
++++ keygen-test/getpid.c	2024-12-03 18:37:11.396731947 -0500
+@@ -1,8 +1,8 @@
+ /*
+  * Compile:
+ 
+-gcc -fPIC -c getpid.c -o getpid.o
+-gcc -shared -o getpid.so getpid.o
++clang -fPIC -c getpid.c -o getpid.o
++clang -shared -o getpid.so getpid.o
+ 
+  * Use:
+  
+diff -urN keygen-test.orig/Makefile keygen-test/Makefile
+--- keygen-test.orig/Makefile	2024-12-03 18:36:27.936733482 -0500
++++ keygen-test/Makefile	2024-12-03 18:36:52.572732612 -0500
+@@ -3,10 +3,10 @@
+ 	./keygen-test
+ 
+ getpid.o: getpid.c
+-	gcc $(CPPFLAGS) $(CFLAGS) -fPIC -c $< -o $@
++	clang $(CPPFLAGS) $(CFLAGS) -fPIC -c $< -o $@
+ 
+ getpid.so: getpid.o
+-	gcc $(LDFLAGS) -shared -o $@ $<
++	clang $(LDFLAGS) -shared -o $@ $<
+ 
+ clean:
+ 	rm -f getpid.o getpid.so key1 key1.pub key2 key2.pub
