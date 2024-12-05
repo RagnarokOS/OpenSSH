@@ -2,8 +2,7 @@ openssh (1:9.2p1-2+ragnarok99) stable; urgency=medium
 
   * First build of OpenSSH for Ragnarok.
   * Disables systemd support.
-  * Built with LLVM/Clang, with extra hardening flags,
-    control flow integrity and ThinLTO.
+  * Built with LLVM/Clang, with extra hardening flags and ThinLTO.
 
  -- Ian LeCorbeau <I-LeCorbeau@protonmail.com>  Mon, 02 Dec 2024 15:35:01 -0500
 
