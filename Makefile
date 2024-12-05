@@ -1,18 +1,18 @@
 # Ragnarok-specific Makefile for OpenSSH
-# $Ragnarok: Makefile,v 1.2 2024/12/05 16:19:04 lecorbeau Exp $
+# $Ragnarok: Makefile,v 1.3 2024/12/05 19:06:40 lecorbeau Exp $
 
 MAKE	= make -C
 PKG	= openssh
 VERSION	= 9.2p1
 
-DEBIAN	= changelog control rules
+DEBIAN	= debian
 
 src:
 	/usr/bin/apt-get source openssh
 
 # Building a deb package
 deb: src
-	cp ${DEBIAN} ${PKG}-${VERSION}/debian/
+	cp -r ${DEBIAN} ${PKG}-${VERSION}/
 	patch -d ${PKG}-${VERSION} < patches/get-proper-clang-version.diff
 	cd ${PKG}-${VERSION}; \
 		dch -n -p; \
